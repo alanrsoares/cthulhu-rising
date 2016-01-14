@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { NICE, SUPER_NICE } from './colors'
 
 class Counter extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = { counter: 0 }
     this.interval = setInterval(() => this.tick(), 1000)
   }
 
-  tick() {
+  tick () {
     this.setState({
       counter: this.state.counter + this.props.increment
     })
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearInterval(this.interval)
   }
 
-  render() {
+  render () {
     return (
       <h1 style={{ color: this.props.color }}>
         Counter ({this.props.increment}): {this.state.counter}
@@ -27,8 +27,13 @@ class Counter extends Component {
   }
 }
 
+Counter.propTypes = {
+  increment: PropTypes.number,
+  color: PropTypes.string
+}
+
 export class App extends Component {
-  render() {
+  render () {
     return (
       <div>
         <Counter increment={1} color={NICE} />

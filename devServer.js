@@ -17,8 +17,7 @@ app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')))
 
 app.listen(3000, 'localhost', (err) => {
   if (err) {
-    console.log(err)
-    return
+    return console.log(err)
   }
 
   console.log('Listening at http://localhost:3000')
