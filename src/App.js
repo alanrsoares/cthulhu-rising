@@ -1,43 +1,26 @@
 import React, { Component, PropTypes } from 'react'
-import { NICE, SUPER_NICE } from './colors'
+import GameState from './GameState'
 
-class Counter extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { counter: 0 }
-    this.interval = setInterval(() => this.tick(), 1000)
+class Game extends Phaser.Game {
+	constructor(root) {
+		super(500, 500, Phaser.AUTO, root, null)
+		this.state.add('GameState', GameState, false)
+	}
+
+  start() {
+    this.state.start('GameState')
   }
-
-  tick () {
-    this.setState({
-      counter: this.state.counter + this.props.increment
-    })
-  }
-
-  componentWillUnmount () {
-    clearInterval(this.interval)
-  }
-
-  render () {
-    return (
-      <h1 style={{ color: this.props.color }}>
-        Counter ({this.props.increment}): {this.state.counter}
-      </h1>
-    )
-  }
-}
-
-Counter.propTypes = {
-  increment: PropTypes.number,
-  color: PropTypes.string
 }
 
 export class App extends Component {
+  componentDidMount() {
+    new Game(this.refs.game).start()
+  }
+
   render () {
     return (
       <div>
-        <Counter increment={1} color={NICE} />
-        <Counter increment={5} color={SUPER_NICE} />
+        <div ref="game" className="game-root"></div>
       </div>
     )
   }
