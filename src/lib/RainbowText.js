@@ -1,6 +1,12 @@
+const STYLES = {
+	font: '45px Arial',
+	fill: '#ff0044',
+	align: 'center'
+}
+
 export default class RainbowText extends Phaser.Text {
 	constructor(game, x, y, text) {
-		super(game, x, y, text, { font: '45px Arial', fill: '#ff0044', align: 'center' })
+		super(game, x, y, text, STYLES)
 		this._speed = 125 //ms
 		this._colorIndex = 0
 		this._colors = ['#ee4035', '#f37736', '#fdf498', '#7bc043', '#0392cf']
