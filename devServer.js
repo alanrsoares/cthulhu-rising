@@ -13,7 +13,9 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler))
 
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')))
+app.use(express.static('assets'))
+
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')))
 
 app.listen(3000, 'localhost', (err) => {
   if (err) {

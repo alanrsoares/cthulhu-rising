@@ -27,7 +27,8 @@ export default class GameState extends Phaser.State {
       this.sprite.body.velocity.x = -300
     else if (this.cursors.right.isDown)
       this.sprite.body.velocity.x = 300
-		else if (this.cursors.up.isDown)
+			
+		if (this.cursors.up.isDown)
       this.sprite.body.velocity.y = -300
     else if (this.cursors.down.isDown)
       this.sprite.body.velocity.y = 300
