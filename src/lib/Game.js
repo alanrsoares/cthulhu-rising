@@ -1,12 +1,14 @@
 import GameState from './GameState'
 
-export default class Game extends Phaser.Game {
-	constructor(root, width, height) {
-		super(+width, +height, Phaser.AUTO, root, null)
-		this.state.add('GameState', GameState, false)
-	}
+const { Game, AUTO } = window.Phaser
 
-  start() {
+export default class GameRoot extends Game {
+  constructor (root, width, height) {
+    super(+width, +height, AUTO, root, null)
+    this.state.add('GameState', GameState, false)
+  }
+
+  start () {
     this.state.start('GameState')
   }
 }
