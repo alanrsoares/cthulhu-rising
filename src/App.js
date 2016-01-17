@@ -6,7 +6,7 @@ export class App extends Component {
     return (
       <div>
         <div>Cthulhu Rising</div>
-        <Board width="800" height="600"/>
+        <Board width='800' height='600'/>
       </div>
     )
   }

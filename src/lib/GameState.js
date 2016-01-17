@@ -23,18 +23,21 @@ export default class GameState extends Phaser.State {
     this.sprite.body.velocity.x = 0
     this.sprite.body.velocity.y = 0
 
-    if (this.cursors.left.isDown)
+    if (this.cursors.left.isDown) {
       this.sprite.body.velocity.x = -300
-    else if (this.cursors.right.isDown)
+    } else if (this.cursors.right.isDown) {
       this.sprite.body.velocity.x = 300
+		}
 
-		if (this.cursors.up.isDown)
+		if (this.cursors.up.isDown) {
       this.sprite.body.velocity.y = -300
-    else if (this.cursors.down.isDown)
+    } else if (this.cursors.down.isDown) {
       this.sprite.body.velocity.y = 300
+		}
 
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
+    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
 			this.fireBullet()
+		}
 	}
 
 	makeBullet (i) {
@@ -49,7 +52,7 @@ export default class GameState extends Phaser.State {
 	}
 
 	fireBullet () {
-    if (this.game.time.now <= this.bulletTime) return
+    if (this.game.time.now <= this.bulletTime) { return }
 
 		this.bullet = this.bullets.getFirstExists(false)
 
