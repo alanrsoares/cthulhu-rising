@@ -2,22 +2,22 @@ import React, { Component } from 'react'
 import Game from '../lib/Game'
 
 export default class Board extends Component {
-	componentDidMount() {
-    this.paintCanvas()
-  }
+	componentDidMount () {
+		this.paintCanvas()
+	}
 
-	componentDidUpdate() {
+	componentDidUpdate () {
 		if (module.hot) {
 			this.refs.game.removeChild(this.refs.game.firstChild)
 			this.paintCanvas()
 		}
 	}
 
-  render() {
+	render () {
 		return <div ref="game"></div>
-  }
+	}
 
-	paintCanvas() {
+	paintCanvas () {
 		new Game(this.refs.game, this.props.width, this.props.height).start()
 	}
 }

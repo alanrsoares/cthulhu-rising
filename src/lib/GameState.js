@@ -13,10 +13,10 @@ export default class GameState extends Phaser.State {
 
     for (let i = 0; i < 20; i++) this.makeBullet(i)
 
-    this.sprite = this.game.add.sprite(400, 550, 'phaser');
-    this.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
-    this.cursors = this.game.input.keyboard.createCursorKeys();
-    this.game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+    this.sprite = this.game.add.sprite(400, 550, 'phaser')
+    this.game.physics.enable(this.sprite, Phaser.Physics.ARCADE)
+    this.cursors = this.game.input.keyboard.createCursorKeys()
+    this.game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ])
 	}
 
 	update () {
@@ -37,7 +37,7 @@ export default class GameState extends Phaser.State {
 			this.fireBullet()
 	}
 
-	makeBullet(i) {
+	makeBullet (i) {
 		const bullet = Object.assign(this.bullets.create(0, 0, 'bullet'), {
 			name: 'bullet' + i,
 			exists: false,
@@ -49,14 +49,14 @@ export default class GameState extends Phaser.State {
 	}
 
 	fireBullet () {
-    if (this.game.time.now > this.bulletTime) {
-      this.bullet = this.bullets.getFirstExists(false)
+    if (this.game.time.now <= this.bulletTime) return
 
-      if (this.bullet) {
-        this.bullet.reset(this.sprite.x + 6, this.sprite.y - 8)
-        this.bullet.body.velocity.y = -300;
-        this.bulletTime = this.game.time.now + 150;
-      }
+		this.bullet = this.bullets.getFirstExists(false)
+
+    if (this.bullet) {
+      this.bullet.reset(this.sprite.x + 6, this.sprite.y - 8)
+      this.bullet.body.velocity.y = -300
+      this.bulletTime = this.game.time.now + 150
     }
 	}
 
