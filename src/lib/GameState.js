@@ -2,31 +2,15 @@ const {
   State, Physics, Keyboard
 } = window.Phaser
 
+import cthulhu from '../sprites/cthulhu'
+
 export default class GameState extends State {
   preload () {
     this.game.load.image('bullet', 'assets/misc/bullet0.png')
   }
 
   create () {
-    const dude = [
-      '....DDDDDDDD....',
-      '...DDEEDDDDDD...',
-      '..DDDEEDDDDDDD..',
-      '..DDDDDDDDDDDD..',
-      '..DDDD5555DDDD..',
-      '..DDD555555DDD..',
-      '..DDD555555DDD..',
-      '..DDD555555DDD..',
-      '..334244333333..',
-      '.33344443333333.',
-      '3333444433333333',
-      '....5...5..5....',
-      '...5....5...5...',
-      '.66....66....66.',
-      '.66....66....66.'
-    ]
-
-    this.game.create.texture('phaser', dude, 4, 4, 0)
+    this.game.create.texture('cthulhu', cthulhu, 4, 4, 0)
 
     this.bulletTime = 0
     this.game.stage.backgroundColor = '#2d2d2d'
@@ -36,7 +20,7 @@ export default class GameState extends State {
 
     for (let i = 0; i < 20; i++) this.makeBullet(i)
 
-    this.sprite = this.game.add.sprite(400, 550, 'phaser')
+    this.sprite = this.game.add.sprite(400, 550, 'cthulhu')
     this.sprite.anchor.set(0.5)
     this.game.physics.enable(this.sprite, Physics.ARCADE)
     this.cursors = this.game.input.keyboard.createCursorKeys()
