@@ -67,7 +67,7 @@ export default class GameState extends State {
     this.bullet = this.bullets.getFirstExists(false)
 
     if (this.bullet) {
-      this.bullet.reset(this.sprite.x + 6, this.sprite.y - 8)
+      this.bullet.reset(this.sprite.x - 7, this.sprite.y - 15)
       this.bullet.body.velocity.y = -300
       this.bulletTime = this.game.time.now + 150
     }
