@@ -1,6 +1,6 @@
-import { symmetry } from '../lib/utils'
+import { mirror } from '../lib/utils'
 
-export default symmetry([
+export default mirror([
   '...............',
   '.........0000..',
   '.......0000....',
