@@ -4,6 +4,8 @@ const {
 
 import cthulhu from '../sprites/cthulhu'
 
+const { assign } = Object
+
 export default class GameState extends State {
   preload () {
     this.game.load.image('bullet', 'assets/misc/bullet0.png')
@@ -14,33 +16,33 @@ export default class GameState extends State {
 
     this.bulletTime = 0
     this.game.stage.backgroundColor = '#2d2d2d'
-    this.bullets = this.game.add.group()
-    this.bullets.enableBody = true
-    this.bullets.physicsBodyType = Physics.ARCADE
+    this.bullets = assign(this.game.add.group(), {
+      enableBody: true,
+      physicsBodyType: Physics.ARCADE
+    })
 
     for (let i = 0; i < 20; i++) this.makeBullet(i)
 
-    this.sprite = this.game.add.sprite(400, 550, 'cthulhu')
-    this.sprite.anchor.set(0.5)
-    this.game.physics.enable(this.sprite, Physics.ARCADE)
+    this.player = this.game.add.sprite(400, 550, 'cthulhu')
+    this.player.anchor.set(0.5)
+    this.game.physics.enable(this.player, Physics.ARCADE)
     this.cursors = this.game.input.keyboard.createCursorKeys()
     this.game.input.keyboard.addKeyCapture([Keyboard.SPACEBAR])
   }
 
   update () {
-    this.sprite.body.velocity.x = 0
-    this.sprite.body.velocity.y = 0
+    assign(this.player.body.velocity, { x: 0, y: 0 })
 
     if (this.cursors.left.isDown) {
-      this.sprite.body.velocity.x = -300
+      this.player.body.velocity.x = -300
     } else if (this.cursors.right.isDown) {
-      this.sprite.body.velocity.x = 300
+      this.player.body.velocity.x = 300
     }
 
     if (this.cursors.up.isDown) {
-      this.sprite.body.velocity.y = -300
+      this.player.body.velocity.y = -300
     } else if (this.cursors.down.isDown) {
-      this.sprite.body.velocity.y = 300
+      this.player.body.velocity.y = 300
     }
 
     if (this.game.input.keyboard.isDown(Keyboard.SPACEBAR)) {
@@ -49,7 +51,7 @@ export default class GameState extends State {
   }
 
   makeBullet (i) {
-    const bullet = Object.assign(this.bullets.create(0, 0, 'bullet'), {
+    const bullet = assign(this.bullets.create(0, 0, 'bullet'), {
       name: 'bullet' + i,
       exists: false,
       visible: false,
@@ -67,7 +69,7 @@ export default class GameState extends State {
     this.bullet = this.bullets.getFirstExists(false)
 
     if (this.bullet) {
-      this.bullet.reset(this.sprite.x - 7, this.sprite.y - 15)
+      this.bullet.reset(this.player.x - 7, this.player.y - 15)
       this.bullet.body.velocity.y = -300
       this.bulletTime = this.game.time.now + 150
     }
