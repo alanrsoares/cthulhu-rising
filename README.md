@@ -2,6 +2,8 @@
 
 ## Installation
 
+![alt tag](/assets/sprites/player.png)
+
 ```bash
 git clone https://github.com/alanrsoares/cthulhu-rising.git
 cd cthulhu-rising
