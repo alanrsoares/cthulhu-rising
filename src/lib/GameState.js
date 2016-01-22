@@ -2,9 +2,11 @@ const {
   State, Physics, Keyboard
 } = window.Phaser
 
-import cthulhu from '../sprites/cthulhu'
+import frames from '../sprites/cthulhu'
 
 const { assign } = Object
+
+const call = (method, ...args) => x => x[method](...args)
 
 export default class GameState extends State {
   preload () {
@@ -12,7 +14,7 @@ export default class GameState extends State {
   }
 
   create () {
-    this.game.create.texture('cthulhu', cthulhu, 4, 4, 0)
+    frames.forEach((frame, i) => this.game.create.texture('cthulhu' + i, frame, 4, 4, 0))
 
     this.bulletTime = 0
     this.game.stage.backgroundColor = '#2d2d2d'
@@ -23,7 +25,7 @@ export default class GameState extends State {
 
     for (let i = 0; i < 20; i++) this.makeBullet(i)
 
-    this.player = this.game.add.sprite(400, 550, 'cthulhu')
+    this.player = this.game.add.sprite(400, 550, 'cthulhu0')
     this.player.anchor.set(0.5)
     this.game.physics.enable(this.player, Physics.ARCADE)
     this.cursors = this.game.input.keyboard.createCursorKeys()
@@ -58,7 +60,7 @@ export default class GameState extends State {
       checkWorldBounds: true
     })
 
-    bullet.events.onOutOfBounds.add(this.resetBullet, this)
+    bullet.events.onOutOfBounds.add(call('kill'), this)
   }
 
   fireBullet () {
@@ -73,9 +75,5 @@ export default class GameState extends State {
       this.bullet.body.velocity.y = -300
       this.bulletTime = this.game.time.now + 150
     }
-  }
-
-  resetBullet (bullet) {
-    bullet.kill()
   }
 }
